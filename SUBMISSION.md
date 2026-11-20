@@ -45,13 +45,12 @@ Node.js Telegram bot.
 ## Links (fill in before submitting)
 
 - Repo: https://github.com/nastari142/GlassWallet (public, pushed 2026-11-20).
-- Demo video: TODO — record the flow on a real machine/G2 (simulator tap
-  input does not work in a headless VM), or build an animated demo.
+- Demo video: https://github.com/nastari142/GlassWallet/blob/main/demo-video-bento-v2.mp4 (15s, 720x900, bento-grid tour with ambient backsound; confirmed by dola 2026-11-20 as the submission video).
 - Live demo: Even Hub simulator (dev) / G2 hardware (demo day).
 
 ## Known gaps before submission
 
 - [x] Telegram bot live test — @glasswalletbot live since 2026-11-20, /start + animation verified (bot token never committed).
-- [ ] Tap/scroll flow re-checked on a real machine or G2 hardware.
-- [ ] Demo video recorded.
+- [x] Tap/scroll flow re-checked on a real machine — verified by dola on his PC 2026-11-20 (full flow Balance → Send → Confirm → Sending → Success, English UI); real G2 hardware still untested.
+- [x] Demo video recorded — bento v2, confirmed by dola 2026-11-20 as the submission video.
 - [x] Repo created on GitHub and pushed.
