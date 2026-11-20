@@ -34,7 +34,7 @@ export function createFlow(): FlowState {
     amountIndex: 0,
     lastTx: null,
     busy: false,
-    latestNotif: 'Telegram: alert harga BNB aktif',
+    latestNotif: 'Telegram: BNB price alert active',
   }
 }
 
@@ -47,52 +47,52 @@ export function renderFlow(s: FlowState): string {
     case 'balance':
       return [
         'GLASSWALLET  (demo - no real funds)',
-        `Saldo BNB : ${fmtBnb(wallet.bnb)}  (${fmtUsd(wallet.bnb * wallet.bnbUsd)})`,
-        `Saldo USDT: ${wallet.usdt.toFixed(2)}`,
+        `BNB balance : ${fmtBnb(wallet.bnb)}  (${fmtUsd(wallet.bnb * wallet.bnbUsd)})`,
+        `USDT balance: ${wallet.usdt.toFixed(2)}`,
         `BNB: ${fmtUsd(wallet.bnbUsd)}`,
-        `Alamat: ${DEMO_ADDRESS_SHORT}`,
+        `Address: ${DEMO_ADDRESS_SHORT}`,
         s.latestNotif,
         '',
-        'Ketuk: Kirim  |  Ketuk 2x: Keluar',
+        'Tap: Send  |  Double-tap: Exit',
       ].join('\n')
     case 'send':
       return [
-        'KIRIM BNB',
-        `Ke: ${DEMO_RECIPIENT_SHORT}`,
+        'SEND BNB',
+        `To: ${DEMO_RECIPIENT_SHORT}`,
         '',
-        `Jumlah: ${fmtBnb(amountOf(s))} BNB (${fmtUsd(amountOf(s) * wallet.bnbUsd)})`,
-        `Saldo: ${fmtBnb(wallet.bnb)} BNB`,
+        `Amount: ${fmtBnb(amountOf(s))} BNB (${fmtUsd(amountOf(s) * wallet.bnbUsd)})`,
+        `Balance: ${fmtBnb(wallet.bnb)} BNB`,
         '',
-        'Putar ring: ganti jumlah',
-        'Ketuk: Lanjut  |  Ring ke atas: kembali',
+        'Scroll ring: change amount',
+        'Tap: Continue  |  Scroll up: back',
       ].join('\n')
     case 'confirm':
       return [
-        'KONFIRMASI - cek dulu!',
+        'CONFIRM - check first!',
         '',
-        `Kirim: ${fmtBnb(amountOf(s))} BNB (${fmtUsd(amountOf(s) * wallet.bnbUsd)})`,
-        `Ke   : ${DEMO_RECIPIENT_SHORT}`,
-        `Biaya: ~${fmtBnb(MOCK_FEE_BNB)} BNB (mock)`,
+        `Send: ${fmtBnb(amountOf(s))} BNB (${fmtUsd(amountOf(s) * wallet.bnbUsd)})`,
+        `To   : ${DEMO_RECIPIENT_SHORT}`,
+        `Fee: ~${fmtBnb(MOCK_FEE_BNB)} BNB (mock)`,
         '',
-        'KETUK KACAMATA untuk konfirmasi',
-        'Ring ke atas: batal',
+        'TAP GLASSES to confirm',
+        'Scroll up: cancel',
       ].join('\n')
     case 'sending':
       return [
-        'Mengirim...',
+        'Sending...',
         '',
-        `Menandatangani ${fmtBnb(amountOf(s))} BNB di kacamata...`,
-        'HP tetap di saku.',
+        `Signing ${fmtBnb(amountOf(s))} BNB on glasses...`,
+        'Phone stays in pocket.',
       ].join('\n')
     case 'success':
       return [
-        'BERHASIL ✓',
+        'SUCCESS ✓',
         '',
-        `${fmtBnb(s.lastTx?.amountBnb ?? 0)} BNB terkirim (mock)`,
+        `${fmtBnb(s.lastTx?.amountBnb ?? 0)} BNB sent (mock)`,
         `Tx: ${s.lastTx?.hashShort ?? '-'}`,
-        `Saldo baru: ${fmtBnb(wallet.bnb)} BNB`,
+        `New balance: ${fmtBnb(wallet.bnb)} BNB`,
         '',
-        'Ketuk: kembali ke saldo',
+        'Tap: back to balance',
       ].join('\n')
   }
 }

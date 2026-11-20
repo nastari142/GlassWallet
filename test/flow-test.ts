@@ -83,7 +83,7 @@ await sendPromise
 out = renderFlow(f)
 check('after send -> success', f.screen === 'success', f.screen)
 check('success shows tx hash', has(out, 'Tx: 0x'))
-check('success shows amount', has(out, '0.0500 BNB terkirim'))
+check('success shows amount', has(out, '0.0500 BNB sent'))
 const expected = startBnb - 0.05 - MOCK_FEE_BNB - 0.05 - MOCK_FEE_BNB // f flow + f2 flow
 check(
   'balance deducted (both flows)',

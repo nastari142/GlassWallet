@@ -51,7 +51,7 @@ function check(substr, label) {
 // The initial screen is carried inside the startup-page request itself,
 // not through textContainerUpgrade, so assert on that.
 const startupContent = calls.startup?.textObject?.[0]?.content ?? ''
-if (startupContent.includes('Saldo BNB')) {
+if (startupContent.includes('BNB balance')) {
   console.log('PASS: 1. startup renders balance screen')
   pass++
 } else {
@@ -64,7 +64,7 @@ await sleep(100)
 // count as CLICK_EVENT, per main.ts eventTypeOf().
 emit({ sysEvent: {} })
 await sleep(150)
-check('KIRIM BNB', '2. tap (no eventType) advances balance -> send')
+check('SEND BNB', '2. tap (no eventType) advances balance -> send')
 
 // Scroll down twice via textEvent (not sysEvent) -> amount 0.01 -> 0.05 -> 0.1
 emit({ textEvent: { eventType: E.SCROLL_BOTTOM_EVENT } })
@@ -75,28 +75,28 @@ check('0.1000 BNB', '3. ring scroll down x2 cycles amount to 0.1 BNB')
 
 emit({ sysEvent: { eventType: E.CLICK_EVENT } })
 await sleep(150)
-check('KONFIRMASI', '4. tap advances send -> confirm')
+check('CONFIRM', '4. tap advances send -> confirm')
 
 emit({ sysEvent: { eventType: E.SCROLL_TOP_EVENT } })
 await sleep(150)
-check('KIRIM BNB', '5. ring scroll up cancels confirm -> send')
+check('SEND BNB', '5. ring scroll up cancels confirm -> send')
 
 emit({ sysEvent: { eventType: E.CLICK_EVENT } })
 await sleep(150)
-check('KONFIRMASI', '6. tap advances send -> confirm again')
+check('CONFIRM', '6. tap advances send -> confirm again')
 
 // Confirm tap: shows sending, then success after mockSend (~900ms).
 // A second tap DURING sending must be ignored (busy guard).
 emit({ sysEvent: { eventType: E.CLICK_EVENT } })
 await sleep(150)
-check('Mengirim...', '7. tap on confirm shows sending screen')
+check('Sending...', '7. tap on confirm shows sending screen')
 emit({ sysEvent: { eventType: E.CLICK_EVENT } })
 await sleep(1500)
-check('BERHASIL', '8. sending completes to success (busy-guard tap ignored)')
+check('SUCCESS', '8. sending completes to success (busy-guard tap ignored)')
 
 emit({ sysEvent: { eventType: E.CLICK_EVENT } })
 await sleep(150)
-check('Saldo BNB', '9. tap on success returns to balance')
+check('BNB balance', '9. tap on success returns to balance')
 
 emit({ sysEvent: { eventType: E.DOUBLE_CLICK_EVENT } })
 await sleep(150)
