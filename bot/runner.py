@@ -2,7 +2,7 @@
 """GlassWallet Telegram bot runner (demo, no real funds).
 
 Polls the GlassWallet bot (@glasswalletbot) with getUpdates and answers
-/start, /saldo, /kirim, /harga — mirroring bot/bot.mjs, whose Node code
+/start, /balance, /send, /price — mirroring bot/bot.mjs, whose Node code
 cannot read the vault-stored token. The Bot API calls go through
 custom.telegram-bot-glasswallet/bin/telegram_api.py, which uses the stored
 credential via a surrogate; the token itself is never in this file, in
@@ -100,12 +100,12 @@ def handle_command(chat_id, text):
             chat_id,
             "\U0001f453 GlassWallet (demo)\n\n"
             "Crypto wallet on Even G2 glasses, with this bot as its companion.\n\n"
-            "/saldo \u2014 check demo balance\n"
-            "/kirim <amount_BNB> [address] \u2014 mock send (no real funds)\n"
-            "/harga \u2014 BNB price\n\n"
+            "/balance \u2014 check demo balance\n"
+            "/send <amount_BNB> [address] \u2014 mock send (no real funds)\n"
+            "/price \u2014 BNB price\n\n"
             "Confirm transactions on the glasses: tap the temple / spin the R1 ring. The phone stays in your pocket.",
         )
-    elif cmd == "/saldo":
+    elif cmd == "/balance":
         price = fetch_bnb_price()
         send_message(
             chat_id,
@@ -114,14 +114,14 @@ def handle_command(chat_id, text):
             f"USDT: {DEMO['usdt']:.2f}\n"
             f"BNB: {fmt_usd(price)}",
         )
-    elif cmd == "/kirim":
+    elif cmd == "/send":
         try:
             amount = float(args[0]) if args else float("nan")
         except (ValueError, IndexError):
             amount = float("nan")
         to = args[1] if len(args) > 1 else "0x1234567890abcdef1234567890abcdef12345678"
         if not (amount == amount and amount > 0):
-            send_message(chat_id, "Usage: /kirim <amount_BNB> [address]\nExample: /kirim 0.05")
+            send_message(chat_id, "Usage: /send <amount_BNB> [address]\nExample: /send 0.05")
             return
         if amount + MOCK_FEE_BNB > DEMO["bnb"]:
             send_message(chat_id, f"Demo balance too low (balance {fmt_bnb(DEMO['bnb'])} BNB).")
@@ -137,16 +137,16 @@ def handle_command(chat_id, text):
             f"New balance: {fmt_bnb(DEMO['bnb'])} BNB\n"
             f"The same notification was sent to the glasses.",
         )
-    elif cmd == "/harga":
+    elif cmd == "/price":
         price = fetch_bnb_price()
         send_message(chat_id, f"BNB: {fmt_usd(price)} (demo)")
     else:
-        send_message(chat_id, "Unknown command. Try /start, /saldo, /kirim, /harga.")
+        send_message(chat_id, "Unknown command. Try /start, /balance, /send, /price.")
 
 
 def main():
     print("GlassWallet bot runner started (demo, no real funds).", flush=True)
-    print("Commands: /start /saldo /kirim /harga", flush=True)
+    print("Commands: /start /balance /send /price", flush=True)
     offset = 0
     while True:
         try:

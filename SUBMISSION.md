@@ -21,8 +21,8 @@ and the live BNB price; tap to send, scroll the R1 ring to pick an amount
 (0.01 / 0.05 / 0.1 / 0.5 BNB), tap the temple to confirm, and the phone —
 which only relays data in the background — never has to come out.
 
-A Telegram bot is the wallet's companion: it answers /saldo (balance),
-/kirim (send), /harga (BNB price), and pushes price alerts and transaction
+A Telegram bot is the wallet's companion: it answers /balance, /send, and
+/price (BNB price), and pushes price alerts and transaction
 notifications that show up on the glasses balance screen. That is the
 Telegram integration: the bot and the glasses stay in sync, so an alert
 you get on Telegram is already waiting on your glasses.

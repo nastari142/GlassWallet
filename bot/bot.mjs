@@ -10,11 +10,11 @@
  *
  * Commands:
  *   /start  — help
- *   /saldo  — mock BNB + USDT balance (same demo numbers as the glasses app)
- *   /kirim <amount_BNB> [address] — mock send: returns a mock tx hash, and
+ *   /balance  — mock BNB + USDT balance (same demo numbers as the glasses app)
+ *   /send <amount_BNB> [address] — mock send: returns a mock tx hash, and
  *           pushes the same notification to the glasses app's feed
  *           (public/notifications.json) so the simulator display updates
- *   /harga  — BNB price (CoinGecko public API, read-only, mock fallback)
+ *   /price  — BNB price (CoinGecko public API, read-only, mock fallback)
  *
  * Push helpers (used by the demo alert loop below):
  *   sendPriceAlert()     — BNB price alert to TELEGRAM_CHAT_ID
@@ -144,12 +144,12 @@ async function handleCommand(chatId, text) {
         chatId,
         '👓 GlassWallet (demo)\n\n' +
           'Crypto wallet on Even G2 glasses, with this bot as its companion.\n\n' +
-          '/saldo — check demo balance\n' +
-          '/kirim <amount_BNB> [address] — mock send (no real funds)\n' +
-          '/harga — BNB price\n\n' +
+          '/balance — check demo balance\n' +
+          '/send <amount_BNB> [address] — mock send (no real funds)\n' +
+          '/price — BNB price\n\n' +
           'Confirm transactions on the glasses: tap the temple / spin the R1 ring. The phone stays in your pocket.',
       )
-    case '/saldo': {
+    case '/balance': {
       const price = await fetchBnbPrice()
       return sendMessage(
         chatId,
@@ -159,11 +159,11 @@ async function handleCommand(chatId, text) {
           `BNB: ${fmtUsd(price)}`,
       )
     }
-    case '/kirim': {
+    case '/send': {
       const amount = Number(args[0])
       const to = args[1] || '0x1234567890abcdef1234567890abcdef12345678'
       if (!Number.isFinite(amount) || amount <= 0) {
-        return sendMessage(chatId, 'Usage: /kirim <amount_BNB> [address]\nExample: /kirim 0.05')
+        return sendMessage(chatId, 'Usage: /send <amount_BNB> [address]\nExample: /send 0.05')
       }
       if (amount + MOCK_FEE_BNB > DEMO.bnb) {
         return sendMessage(chatId, `Demo balance too low (balance ${fmtBnb(DEMO.bnb)} BNB).`)
@@ -180,12 +180,12 @@ async function handleCommand(chatId, text) {
           `The same notification was sent to the glasses.`,
       )
     }
-    case '/harga': {
+    case '/price': {
       const price = await fetchBnbPrice()
       return sendMessage(chatId, `BNB: ${fmtUsd(price)} (demo)`)
     }
     default:
-      return sendMessage(chatId, 'Unknown command. Try /start, /saldo, /kirim, /harga.')
+      return sendMessage(chatId, 'Unknown command. Try /start, /balance, /send, /price.')
   }
 }
 
@@ -214,7 +214,7 @@ async function poll() {
 }
 
 console.log('GlassWallet bot stub running (demo, no real funds).')
-console.log('Commands: /start /saldo /kirim /harga')
+console.log('Commands: /start /balance /send /price')
 if (!CHAT_ID) console.log('Note: TELEGRAM_CHAT_ID not set — push alerts go to the glasses feed only.')
 if (DEMO_ALERTS) {
   setTimeout(() => void sendPriceAlert().catch((e) => console.error(e.message)), 10000)

@@ -33,8 +33,8 @@ TELEGRAM_BOT_TOKEN=<token> npm run bot
 # optional: TELEGRAM_CHAT_ID=<chat id> DEMO_ALERTS=1
 ```
 
-Commands: `/start`, `/saldo` (mock balance), `/kirim <jumlah_BNB> [alamat]`
-(mock send — returns a mock tx hash), `/harga` (BNB price).
+Commands: `/start`, `/balance` (mock balance), `/send <amount_BNB> [address]`
+(mock send — returns a mock tx hash), `/price` (BNB price).
 
 Every message the bot sends is also written to `public/notifications.json`,
 which the glasses app polls every 15 s in dev/simulator — so a price alert
