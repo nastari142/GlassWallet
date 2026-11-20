@@ -44,14 +44,14 @@ Node.js Telegram bot.
 
 ## Links (fill in before submitting)
 
-- Repo: TODO — create `GlassWallet` repo on GitHub (nastari142) and push.
+- Repo: https://github.com/nastari142/GlassWallet (public, pushed 2026-11-20).
 - Demo video: TODO — record the flow on a real machine/G2 (simulator tap
   input does not work in a headless VM), or build an animated demo.
 - Live demo: Even Hub simulator (dev) / G2 hardware (demo day).
 
 ## Known gaps before submission
 
-- [ ] Telegram bot live test (needs a real @BotFather token — not committed).
+- [x] Telegram bot live test — @glasswalletbot live since 2026-11-20, /start + animation verified (bot token never committed).
 - [ ] Tap/scroll flow re-checked on a real machine or G2 hardware.
 - [ ] Demo video recorded.
-- [ ] Repo created on GitHub and pushed.
+- [x] Repo created on GitHub and pushed.
