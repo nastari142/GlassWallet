@@ -106,7 +106,12 @@ async function onTap(source?: EventSourceType): Promise<void> {
         ? 'temple kiri'
         : 'temple kanan'
   console.log(`Tap (${from}) on ${flow.screen}`)
-  await tap(flow, mockSend)
+  // Render the intermediate screen (e.g. 'sending' while the send runs)
+  // before awaiting, otherwise the user never sees it: tap() only returns
+  // after mockSend resolves, by which time the screen is already 'success'.
+  const p = tap(flow, mockSend)
+  await show()
+  await p
   await show()
 }
 
