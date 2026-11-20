@@ -1,0 +1,1 @@
+{"edition":"202601","entrypoint":"index.html","min_sdk_version":"0.0.10","name":"GlassWallet","package_id":"com.dola.glasswallet","permissions":[{"desc":"Read-only BNB price fetch for display (CoinGecko public API). No funds move.","name":"network","whitelist":["https://api.coingecko.com"]}],"supported_languages":["en","id"],"version":"0.1.0"}
