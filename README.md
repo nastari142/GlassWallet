@@ -10,6 +10,19 @@ stays in the pocket (it only relays data in the background).
 > Balances are hard-coded mock numbers. The only live call is a read-only
 > BNB price fetch (CoinGecko public API) with a mock fallback.
 
+## Demo video
+
+- **Full demo (82 s, narrated):** [GlassWallet — Full Demo | Crypto Wallet on Even Realities G2 Smart Glasses](https://www.youtube.com/watch?v=ppVgewcjkYI) — the problem, the full on-glasses flow (balance → send → confirm), the Telegram bot companion, and the tech stack. File in this repo: `demo-video-detailed-v1.mp4`.
+- **Short version (15 s, silent):** `demo-video-bento-v2.mp4` — bento-grid tour of the 8 features.
+
+## What existed before Nov 23, 2026
+
+Per the hackathon rules (build during the hackathon; say in the README what
+existed before Nov 23):
+
+- **Built before the hackathon (20 Nov 2026):** the glasses app (Even Hub SDK, Vite + TypeScript, full balance → send → confirm flow), the Telegram bot @glasswalletbot (`/balance`, `/send`, `/price`), and the 15 s demo video v2.
+- **Built during the hackathon (23 Nov 2026):** the detailed 82 s demo video v1 and the DoraHacks Build page.
+
 ## The flow (on the 576×288 glasses canvas)
 
 | Screen | What you see | Input |
